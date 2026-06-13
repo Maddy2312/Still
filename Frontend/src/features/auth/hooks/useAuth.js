@@ -19,7 +19,7 @@ const useAuth = () => {
     try {
       const data = await loginUser(userData);
       dispatch(setUser(data.user));
-      return data.user;
+      return data;
     } catch (error) {
       throw error;
     }
