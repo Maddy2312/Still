@@ -1,9 +1,11 @@
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import useProduct from "../../hooks/useProduct.js";
+import { useNavigate } from "react-router";
 
 const Dashboard = () => {
   const { handleGetSellerProducts } = useProduct();
+  const navigate = useNavigate();
 
   const products = useSelector((state) => state.product.sellerProducts);
 
@@ -44,7 +46,7 @@ const Dashboard = () => {
                 </div>
 
                 <div className="mt-4 flex gap-3">
-                  <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+                  <button onClick={() => navigate(`/seller/product/${product._id}`)} className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
                     Edit
                   </button>
 
