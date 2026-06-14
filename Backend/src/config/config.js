@@ -10,9 +10,12 @@ if(!process.env.PORT){
 if(!process.env.JWT_SECRET){
     throw new Error("Please provide JWT_SECRET in .env file");
 }
-
+if(!process.env.IMAGEKIT_PRIVATE_KEY){
+    throw new Error("Please provide IMAGEKIT_PRIVATE_KEY in .env file");
+}
 export const config = {
     MONGO_URI: process.env.MONGO_URI,
     PORT: process.env.PORT,
     JWT_SECRET: process.env.JWT_SECRET,
+    IMAGEKIT_PRIVATE_KEY: process.env.IMAGEKIT_PRIVATE_KEY,
 }
