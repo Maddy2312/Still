@@ -9,3 +9,8 @@ export const createProduct = async (productData) => {
     const response = await productApiInstance.post("/create", productData);
     return response.data;
 }
+
+export const getSellerProducts = async () => {
+    const response = await productApiInstance.get("/getSellerProducts");
+    return response.data;
+}
