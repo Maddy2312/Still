@@ -42,3 +42,35 @@ export const authenticateSeller = async (req, res, next) => {
         })
     }
 }
+
+export const authenticateUser = async (req, res, next) => {
+    try{
+        const token = req.cookies.token;
+
+        if(!token){
+            return res.status(401).json({
+                success: false,
+                message: "Unauthorized"
+            })
+        }
+
+        const decodedToken = jwt.verify(token, config.JWT_SECRET);
+        const user = await userModel.findById(decodedToken.id);
+
+        if(!user){
+            return res.status(404).json({
+                success: false,
+                message: "User not found"
+            })
+        }
+
+        req.user = user;
+        next();
+    }catch(error){
+        console.log(error);
+        return res.status(500).json({
+            success: false,
+            message: "Internal server error"
+        })
+    }
+}

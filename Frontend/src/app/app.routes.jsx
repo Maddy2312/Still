@@ -4,11 +4,17 @@ import Login from "../features/auth/pages/Login.jsx";
 import CreateProduct from "../features/products/pages/seller/CreateProduct.jsx";
 import Dashboard from "../features/products/pages/seller/Dashboard.jsx";
 import ProductDetails from "../features/products/pages/seller/ProductDetails.jsx";
+import Home from "../features/products/pages/user/Home.jsx";
+import ProductDetailById from "../features/products/pages/user/ProductDetailById.jsx";
 
 export const routes = createBrowserRouter([
   {
     path: "/",
-    element: <div>Home</div>,
+    element: <Home />,
+  },
+  {
+    path: "/product/:id",
+    element: <ProductDetailById />
   },
   {
     path: "/register",

@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { createProduct, getProductById, getSellerProducts } from "../services/product.api.js";
+import { createProduct, getAllProducts, getProductById, getSellerProducts } from "../services/product.api.js";
 import { setSellerProducts, setProducts, setLoading, setError } from "../state/product.state.js";
 
 
@@ -34,10 +34,21 @@ const useProduct = () => {
         }
     }
 
+    const handleGetAllProducts = async () => {
+        try {
+            const data = await getAllProducts();
+            dispatch(setProducts(data.products));
+            return data.products;
+        } catch (error) {
+            throw error;
+        }
+    }
+
     return {
         handleCreateProduct,
         handleGetSellerProducts,
-        handleGetProductById
+        handleGetProductById,
+        handleGetAllProducts
     }
 }
 
