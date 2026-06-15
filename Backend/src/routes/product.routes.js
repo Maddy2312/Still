@@ -24,7 +24,7 @@ productRouter.post(
 );
 
 productRouter.get("/getSellerProducts", authenticateSeller, getSellerProducts);
-productRouter.get("/getProduct/:id", authenticateSeller, getProductById);
+productRouter.get("/getProduct/:id", getProductById);
 productRouter.get("/getAllProducts", getAllProducts);
 
 export default productRouter;
