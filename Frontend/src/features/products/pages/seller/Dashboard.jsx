@@ -4,7 +4,7 @@ import useProduct from "../../hooks/useProduct.js";
 import { useNavigate } from "react-router";
 
 const Dashboard = () => {
-  const { handleGetSellerProducts } = useProduct();
+  const { handleGetSellerProducts, handleDeleteProduct } = useProduct();
   const navigate = useNavigate();
 
   const products = useSelector((state) => state.product.sellerProducts);
@@ -13,6 +13,16 @@ const Dashboard = () => {
     handleGetSellerProducts();
   }, []);
 
+  const deleteProduct = async (id) => {
+    try {
+      await handleDeleteProduct(id);
+
+      // Refresh products after deleting
+      handleGetSellerProducts();
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <div className="p-6">
       <h1 className="text-3xl font-bold mb-6">Seller Dashboard</h1>
@@ -46,11 +56,17 @@ const Dashboard = () => {
                 </div>
 
                 <div className="mt-4 flex gap-3">
-                  <button onClick={() => navigate(`/seller/product/${product._id}`)} className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+                  <button
+                    onClick={() => navigate(`/seller/product/${product._id}`)}
+                    className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+                  >
                     Edit
                   </button>
 
-                  <button className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">
+                  <button
+                    onClick={() => deleteProduct(product._id)}
+                    className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+                  >
                     Delete
                   </button>
                 </div>

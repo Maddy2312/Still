@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { createProduct, getAllProducts, getProductById, getSellerProducts } from "../controllers/product.controller.js";
+import { createProduct, deleteProduct, getAllProducts, getProductById, getSellerProducts } from "../controllers/product.controller.js";
 import { authenticateSeller } from "../middlewares/auth.middleware.js";
 import multer from "multer";
 import { createProductValidator } from "../validators/product.validator.js";
@@ -26,5 +26,6 @@ productRouter.post(
 productRouter.get("/getSellerProducts", authenticateSeller, getSellerProducts);
 productRouter.get("/getProduct/:id", getProductById);
 productRouter.get("/getAllProducts", getAllProducts);
+productRouter.delete("/deleteProduct/:id", authenticateSeller, deleteProduct);
 
 export default productRouter;
