@@ -23,13 +23,21 @@ const ProductDetailById = () => {
   const [currency, setCurrency] = useState("USD");
   const [quantity, setQuantity] = useState(1);
 
+  const [selectedVariant, setSelectedVariant] = useState(null);
+
   useEffect(() => {
     const fetchProduct = async () => {
       const data = await handleGetProductById(id);
 
-      setProduct(data);
-      setSelectedImage(data.images?.[0]?.url);
-      setCurrency(data.price.currency);
+      const safeData = {
+        ...data,
+        images: data?.images ?? [],
+        variants: data?.variants ?? [],
+      };
+
+      setProduct(safeData);
+      setSelectedImage(safeData.images?.[0]?.url || "");
+      setCurrency(safeData.price.currency);
     };
 
     fetchProduct();
@@ -43,10 +51,17 @@ const ProductDetailById = () => {
     );
   }
 
+  // PRICE LOGIC
+  const activePrice =
+    selectedVariant?.price?.amount ?? product.price.amount;
+
+  const activeCurrency =
+    selectedVariant?.price?.currency ?? product.price.currency;
+
   const convertedPrice = (
-    product.price.amount *
+    activePrice *
     exchangeRates[currency] /
-    exchangeRates[product.price.currency]
+    exchangeRates[activeCurrency]
   ).toFixed(2);
 
   return (
@@ -58,28 +73,29 @@ const ProductDetailById = () => {
           {/* LEFT */}
           <div>
 
-            {/* Main image */}
+            {/* MAIN IMAGE */}
             <div className="rounded-3xl overflow-hidden border bg-gray-100">
               <img
-                src={selectedImage}
+                src={
+                  selectedVariant?.images?.[0]?.url ||
+                  selectedImage
+                }
                 alt={product.title}
                 className="w-full h-[650px] object-cover"
               />
             </div>
 
-            {/* Thumbnails */}
+            {/* THUMBNAILS */}
             <div className="flex gap-4 mt-5">
               {product.images.map((image) => (
                 <img
                   key={image._id}
                   src={image.url}
-                  alt=""
-                  onClick={() => setSelectedImage(image.url)}
-                  className={`w-24 h-24 rounded-xl object-cover cursor-pointer border-2 transition ${
-                    selectedImage === image.url
-                      ? "border-black"
-                      : "border-gray-300"
-                  }`}
+                  onClick={() => {
+                    setSelectedImage(image.url);
+                    setSelectedVariant(null); // reset variant image override
+                  }}
+                  className="w-24 h-24 rounded-xl object-cover cursor-pointer border-2"
                 />
               ))}
             </div>
@@ -93,19 +109,61 @@ const ProductDetailById = () => {
               {product.title}
             </h1>
 
-            {/* Rating */}
-            <div className="flex items-center gap-2 mb-6">
-              ⭐⭐⭐⭐⭐
-              <span className="text-gray-500">
-                (125 Reviews)
-              </span>
-            </div>
-
-            <p className="text-gray-600 leading-8 text-lg mb-8">
+            <p className="text-gray-600 mb-6">
               {product.description}
             </p>
 
-            {/* Price Card */}
+            {/* VARIANTS SECTION */}
+            <div className="mb-8">
+              <h3 className="font-bold mb-3">
+                Available Variants
+              </h3>
+
+              {product.variants.length === 0 ? (
+                <p className="text-gray-500">
+                  No variants available
+                </p>
+              ) : (
+                <div className="grid md:grid-cols-2 gap-3">
+
+                  {product.variants.map((variant) => (
+                    <div
+                      key={variant._id}
+                      onClick={() => setSelectedVariant(variant)}
+                      className={`border p-4 rounded-xl cursor-pointer transition ${
+                        selectedVariant?._id === variant._id
+                          ? "border-black bg-gray-100"
+                          : "border-gray-300"
+                      }`}
+                    >
+
+                      <img
+                        src={variant?.images?.[0]?.url}
+                        className="h-24 w-full object-cover rounded-lg mb-2"
+                      />
+
+                      <p className="font-semibold">
+                        {variant.attributes?.color} /{" "}
+                        {variant.attributes?.size}
+                      </p>
+
+                      <p className="text-sm text-gray-500">
+                        Stock: {variant.stock}
+                      </p>
+
+                      <p className="text-sm font-bold">
+                        {variant.price.amount}{" "}
+                        {variant.price.currency}
+                      </p>
+
+                    </div>
+                  ))}
+
+                </div>
+              )}
+            </div>
+
+            {/* PRICE */}
             <div className="bg-green-50 border border-green-200 rounded-3xl p-6 mb-8">
 
               <div className="flex justify-between items-center">
@@ -135,7 +193,7 @@ const ProductDetailById = () => {
 
             </div>
 
-            {/* Quantity */}
+            {/* QUANTITY */}
             <div className="mb-8">
               <h3 className="font-semibold mb-3">
                 Quantity
@@ -166,41 +224,16 @@ const ProductDetailById = () => {
               </div>
             </div>
 
-            {/* Buttons */}
+            {/* BUTTONS */}
             <div className="flex gap-5 mb-10">
 
-              <button className="flex-1 bg-black text-white py-4 rounded-2xl hover:bg-gray-800 transition">
+              <button className="flex-1 bg-black text-white py-4 rounded-2xl">
                 Add to Cart
               </button>
 
-              <button className="flex-1 bg-blue-600 text-white py-4 rounded-2xl hover:bg-blue-700 transition">
+              <button className="flex-1 bg-blue-600 text-white py-4 rounded-2xl">
                 Buy Now
               </button>
-
-            </div>
-
-            {/* Info Cards */}
-            <div className="grid md:grid-cols-2 gap-5">
-
-              <div className="border rounded-2xl p-5">
-                <h3 className="font-bold mb-3">
-                  Shipping
-                </h3>
-
-                <p className="text-gray-500">
-                  Free delivery within 3-5 business days.
-                </p>
-              </div>
-
-              <div className="border rounded-2xl p-5">
-                <h3 className="font-bold mb-3">
-                  Returns
-                </h3>
-
-                <p className="text-gray-500">
-                  30-day hassle-free returns.
-                </p>
-              </div>
 
             </div>
 
