@@ -29,3 +29,8 @@ export const deleteProduct = async (id) => {
     const response = await productApiInstance.delete(`/deleteProduct/${id}`);
     return response.data;
 }
+
+export const createProductVariant = async (id, variantData) => {
+    const response = await productApiInstance.post(`/${id}/variants`, variantData);
+    return response.data;
+}

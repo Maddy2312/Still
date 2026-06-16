@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import priceSchema from "./price.schema.js";
+import variantSchema from "./variants.schema.js";
 
 const productSchema = new mongoose.Schema({
     title: {
@@ -29,7 +30,11 @@ const productSchema = new mongoose.Schema({
                 type: String
             }
         }
-    ]  
+    ],
+    variants: {
+        type: [variantSchema],
+        default: []
+    }  
 }, {
     timestamps: true
 })
