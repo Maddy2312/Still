@@ -22,11 +22,11 @@ productRouter.post(
   createProductValidator,
   createProduct,
 );
+productRouter.post("/:id/variants", authenticateSeller, upload.array("images", 10), createVariantValidator, createProductVariant)
 
 productRouter.get("/getSellerProducts", authenticateSeller, getSellerProducts);
 productRouter.get("/getProduct/:id", getProductById);
 productRouter.get("/getAllProducts", getAllProducts);
 productRouter.delete("/deleteProduct/:id", authenticateSeller, deleteProduct);
-productRouter.post("/:id/variants", authenticateSeller, upload.array("images", 10), createVariantValidator, createProductVariant)
 productRouter.delete("/:id/variants/:variantId", authenticateSeller, deleteProductVariant)
 export default productRouter;
