@@ -2,9 +2,10 @@ import { stockOfVariant } from "../dao/product.dao.js";
 import cartModel from "../models/cart.schema.js";
 import productModel from "../models/product.model.js";
 
-export const addToCart = async () => {
+export const addToCart = async (req, res) => {
   try {
     const { productId, variantId } = req.params;
+    console.log(productId, variantId)
     const { quantity } = req.body;
     const product = await productModel.findOne({
       _id: productId,
@@ -86,6 +87,7 @@ export const addToCart = async () => {
     })
     
   } catch (error) {
+    console.log(error)
     res.status(500).json({
         success: false,
         message: "Internal server error"

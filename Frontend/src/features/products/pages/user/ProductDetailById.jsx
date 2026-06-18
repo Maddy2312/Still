@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import useProduct from "../../hooks/useProduct";
+import useProduct from "../../hooks/useProduct.js";
+import useCart from "../../../cart/hooks/useCart.js";
 
 const exchangeRates = {
   USD: 1,
@@ -17,6 +18,7 @@ const symbols = {
 const ProductDetailById = () => {
   const { id } = useParams();
   const { handleGetProductById } = useProduct();
+  const { handleAddToCart } = useCart();
 
   const [product, setProduct] = useState(null);
   const [selectedImage, setSelectedImage] = useState("");
@@ -227,7 +229,7 @@ const ProductDetailById = () => {
             {/* BUTTONS */}
             <div className="flex gap-5 mb-10">
 
-              <button className="flex-1 bg-black text-white py-4 rounded-2xl">
+              <button onClick={() => handleAddToCart({productId: product._id, variantId: selectedVariant._id, quantity})} className="flex-1 bg-black text-white py-4 rounded-2xl">
                 Add to Cart
               </button>
 
