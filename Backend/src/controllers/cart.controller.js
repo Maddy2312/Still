@@ -94,3 +94,25 @@ export const addToCart = async (req, res) => {
     })
   }
 };
+
+export const getCart = async (req, res) => {
+    try {
+        const user = req.user;
+        if(!cart){
+          cart = await cartModel.create({
+            user: user._id
+          })
+        }
+        return res.status(200).json({
+            success: true,
+            message: "Cart fetched successfully",
+            data: cart
+        })
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({
+            success: false,
+            message: "Internal server error"
+        })
+    }
+}
