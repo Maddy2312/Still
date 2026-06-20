@@ -151,14 +151,9 @@ const ProductDetailById = () => {
 
               {/* Quantity & Action */}
               <div className="flex gap-4 mb-8">
-                <div className="flex items-center border border-stone-200 dark:border-stone-700 rounded-xl px-4 py-3 bg-stone-50/50 dark:bg-stone-900/50">
-                  <button onClick={() => quantity > 1 && setQuantity(quantity - 1)} className="text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 transition-colors">-</button>
-                  <span className="mx-4 text-sm font-medium w-4 text-center text-stone-800 dark:text-stone-200">{quantity}</span>
-                  <button onClick={() => setQuantity(quantity + 1)} className="text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 transition-colors">+</button>
-                </div>
                 <button
                   onClick={() => handleAddToCart({ productId: product._id, variantId: selectedVariant?._id, quantity })}
-                  className="flex-1 bg-stone-900 dark:bg-stone-100 text-white dark:text-stone-900 text-[10px] tracking-[0.2em] uppercase rounded-xl hover:bg-black dark:hover:bg-white transition-all shadow-lg hover:shadow-xl dark:shadow-stone-900/50"
+                  className="w-full h-full py-5 bg-stone-900 dark:bg-stone-100 text-white dark:text-stone-900 text-[10px] tracking-[0.2em] uppercase rounded-xl hover:bg-black dark:hover:bg-white transition-all shadow-lg hover:shadow-xl dark:shadow-stone-900/50 cursor-pointer "
                 >
                   Add to Cart
                 </button>

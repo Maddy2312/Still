@@ -148,7 +148,7 @@ export const incrementUpdateCartQuantity = async (req, res) => {
     
     const itemQuantityInCart = cart.items.find(
         (item) => item.product.toString() === productId && item.variant.toString() === variantId
-    )?.quantity ;
+    )?.quantity || 0;
 
     if (!itemQuantityInCart) {
         return res.status(404).json({
@@ -180,7 +180,7 @@ export const incrementUpdateCartQuantity = async (req, res) => {
 
     return res.status(200).json({
         success: true,
-        message: "Product added to cart successfully",
+        message: "Item quantity incremented successfully",
     })
     
   } catch (error) {
