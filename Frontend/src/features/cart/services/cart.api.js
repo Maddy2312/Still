@@ -13,3 +13,14 @@ export const addItemToCart = async({productId, variantId, quantity}) => {
         console.log(error)
     }
 }
+
+export const getCart = async() => {
+    try {
+        const response = await cartApiInstance.get("/cart", {
+            withCredentials: true,
+        })
+        return response.data;
+    } catch (error) {
+        console.log(error)
+    }
+}

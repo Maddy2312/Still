@@ -14,3 +14,9 @@ export const validateAddToCart = [
     body("quantity").notEmpty().withMessage("Quantity is required"),
     validateRequest
 ]
+
+export const quantityValidator = [
+    param("productId").notEmpty().withMessage("Product ID is required"),
+    param("variantId").notEmpty().withMessage("Variant ID is required"),
+    validateRequest
+]
