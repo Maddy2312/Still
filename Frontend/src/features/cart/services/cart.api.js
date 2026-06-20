@@ -16,7 +16,29 @@ export const addItemToCart = async({productId, variantId, quantity}) => {
 
 export const getCart = async() => {
     try {
-        const response = await cartApiInstance.get("/cart", {
+        const response = await cartApiInstance.get("/getCart", {
+            withCredentials: true,
+        })
+        return response.data;
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export const incrementUpdateCartQuantity = async({productId, variantId}) => {
+    try {
+        const response = await cartApiInstance.patch(`/quantity/increment/${productId}/${variantId}`, {
+            withCredentials: true,
+        })
+        return response.data;
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export const decrementUpdateCartQuantity = async({productId, variantId}) => {
+    try {
+        const response = await cartApiInstance.patch(`/quantity/decrement/${productId}/${variantId}`, {
             withCredentials: true,
         })
         return response.data;

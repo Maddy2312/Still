@@ -7,7 +7,7 @@ const cartRouter = Router();
 
 
 cartRouter.post("/add/:productId/:variantId", authenticateUser, validateAddToCart, addToCart)
-cartRouter.get("/cart", authenticateUser, getCart)
+cartRouter.get("/getCart", authenticateUser, getCart)
 cartRouter.patch("/quantity/increment/:productId/:variantId", authenticateUser, quantityValidator, incrementUpdateCartQuantity)
 cartRouter.patch("/quantity/decrement/:productId/:variantId", authenticateUser, quantityValidator, decrementUpdateCartQuantity)
 

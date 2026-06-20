@@ -1,6 +1,8 @@
+import mongoose from "mongoose";
 import { stockOfVariant } from "../dao/product.dao.js";
 import cartModel from "../models/cart.schema.js";
 import productModel from "../models/product.model.js";
+import { getCartDao } from "../dao/cart.dao.js";
 
 export const addToCart = async (req, res) => {
   try {
@@ -98,7 +100,7 @@ export const addToCart = async (req, res) => {
 export const getCart = async (req, res) => {
     try {
         const user = req.user;
-        let cart = await cartModel.findOne({ user: user._id}).populate('items.product')
+        let cart = await getCartDao(user._id)
         if(!cart){
           cart = await cartModel.create({
             user: user._id
