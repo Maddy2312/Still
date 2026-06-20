@@ -8,9 +8,21 @@ import Home from "../features/products/pages/user/Home.jsx";
 import ProductDetailById from "../features/products/pages/user/ProductDetailById.jsx";
 import Protected from "../features/products/pages/Protected/Protected.jsx";
 import Cart from "../features/cart/pages/Cart.jsx";
+import AppLayout from "./AppLayout.jsx";
 
 export const routes = createBrowserRouter([
   {
+    path: "/register",
+    element: <Register />,
+  },
+  {
+    path: "/login",
+    element: <Login />,
+  },
+  {
+    element: <AppLayout />,
+    children: [
+        {
     path: "/",
     element: <Home />,
   },
@@ -20,16 +32,11 @@ export const routes = createBrowserRouter([
   },
   {
     path: "/cart",
-    element: <Cart />
+    element: <Protected ><Cart /></Protected>
+  },
+    ]
   },
   {
-    path: "/register",
-    element: <Register />,
-  },
-  {
-    path: "/login",
-    element: <Login />,
-  },{
     path: "/seller",
     children: [
       {
