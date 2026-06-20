@@ -216,7 +216,7 @@ export const decrementUpdateCartQuantity = async (req, res) => {
     
     const itemQuantityInCart = cart.items.find(
         (item) => item.product.toString() === productId && item.variant.toString() === variantId
-    )?.quantity || 0;
+    )?.quantity;
 
     if (!itemQuantityInCart) {
         return res.status(404).json({
