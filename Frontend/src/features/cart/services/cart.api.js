@@ -46,3 +46,29 @@ export const decrementUpdateCartQuantity = async({productId, variantId}) => {
         console.log(error)
     }
 }
+
+export const createOrder = async() => {
+    try {
+        const response = await cartApiInstance.post("/payment/create/order", {
+            withCredentials: true,
+        })
+        return response.data;
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export const verifyOrder = async({razorpayOrderId, razorpayPaymentId, razorpaySignature}) => {
+    try {
+        const response = await cartApiInstance.post("/payment/verify/order", {
+            razorpayOrderId,
+            razorpayPaymentId,
+            razorpaySignature,
+        }, {
+            withCredentials: true,
+        })
+        return response.data;
+    } catch (error) {
+        console.log(error)
+    }
+}

@@ -1,9 +1,11 @@
 import { useDispatch } from "react-redux";
 import {
   addItemToCart,
+  createOrder,
   decrementUpdateCartQuantity,
   getCart,
   incrementUpdateCartQuantity,
+  verifyOrder,
 } from "../services/cart.api.js";
 import {
   decrementCartByOne,
@@ -61,11 +63,30 @@ const useCart = () => {
     }
   };
 
+  const handleCreateOrder = async () => {
+    try {
+      const response = await createOrder();
+      return response.order;
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  const handleVerifyOrder = async({razorpayOrderId, razorpayPaymentId, razorpaySignature}) => {
+    try {
+      const response = await verifyOrder({razorpayOrderId, razorpayPaymentId, razorpaySignature})
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  }
   return {
     handleAddToCart,
     handleGetCart,
     handleIncrementUpdateCartQuantity,
     handleDecrementUpdateCartQuantity,
+    handleCreateOrder,
+    handleVerifyOrder,
   };
 };
 
