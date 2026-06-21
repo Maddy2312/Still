@@ -38,7 +38,7 @@ const Dashboard = () => {
             </p>
           </div>
           {/* A sleek placeholder button if the seller needs to add products. Assuming the route is /seller/product/new or similar, you can hook this up later. */}
-          <button className="bg-stone-900 dark:bg-stone-100 text-white dark:text-stone-900 text-[10px] tracking-[0.2em] uppercase px-8 py-3 rounded-xl hover:bg-black dark:hover:bg-white transition-all shadow-md hover:shadow-lg dark:shadow-stone-900/50">
+          <button onClick={()=>navigate("/seller/create-product")} className="bg-stone-900 dark:bg-stone-100 text-white dark:text-stone-900 text-[10px] tracking-[0.2em] uppercase px-8 py-3 rounded-xl hover:bg-black dark:hover:bg-white transition-all shadow-md hover:shadow-lg dark:shadow-stone-900/50">
             Create Product
           </button>
         </div>

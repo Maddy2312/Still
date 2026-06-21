@@ -1,0 +1,330 @@
+Product List: 50 Perfumes — Categorized by Name Theme
+
+======================================================
+CATEGORY 1: Dark & Mysterious Collection
+(Midnight, Obsidian, Velvet, Twilight, Ebony, Silk)
+======================================================
+
+1. Midnight Orchid
+- Description: A captivating, dark floral Eau de Parfum. Features top notes of black truffle and ylang-ylang, a heart of dark orchid, and a rich base of patchouli, vanilla, and incense.
+- Price Amount: 185.00
+- Currency: USD
+- Images: perfume_images50/perfume_1.jpg
+
+2. Midnight Oud
+- Description: An intensely dark and smoky fragrance featuring the finest agarwood, black pepper, and leather.
+- Price Amount: 350.00
+- Currency: USD
+- Images: perfume_images50/perfume_31.jpg
+
+3. Obsidian Rose
+- Description: Not your traditional rose. This modern fragrance juxtaposes fresh Damask rose with sharp black pepper and a deep, leathery oud base for a mysterious finish.
+- Price Amount: 210.00
+- Currency: USD
+- Images: perfume_images50/perfume_3.jpg
+
+4. Obsidian Wood
+- Description: A robust, woody scent with dark cedar, guaiac wood, and a sharp, volcanic obsidian accord.
+- Price Amount: 165.00
+- Currency: USD35
+- Images: perfume_images50/perfume_33.jpg
+
+5. Velvet Night
+- Description: A deep, mysterious scent with black cherry, dark chocolate, and a smooth velvet musk base.
+- Price Amount: 195.00
+- Currency: USD
+- Images: perfume_images50/perfume_9.jpg
+
+6. Velvet Star
+- Description: A plush, luxurious fragrance featuring velvet rose, star fruit, and a deep vanilla orchid base.
+- Price Amount: 190.00
+- Currency: USD
+- Images: perfume_images50/perfume_39.jpg
+
+7. Twilight Ice
+- Description: A mysterious blend of frozen berries, dark plum, and a chilling hint of eucalyptus.
+- Price Amount: 165.00
+- Currency: USD
+- Images: perfume_images50/perfume_16.jpg
+
+8. Twilight Rose
+- Description: A dusky, romantic fragrance with fading roses, twilight musk, and a subtle hint of black tea.
+- Price Amount: 165.00
+- Currency: USD
+- Images: perfume_images50/perfume_46.jpg
+
+9. Ebony Blanc
+- Description: A striking contrast of dark ebony wood and bright, white grapefruit and neroli notes.
+- Price Amount: 195.00
+- Currency: USD
+- Images: perfume_images50/perfume_30.jpg
+
+10. Silk Oud
+- Description: A decadent and luxurious scent profile. Rich Cambodian oud softened by delicate saffron and a heart of sweet praline, draped like smooth silk over the skin.
+- Price Amount: 320.00
+- Currency: USD
+- Images: perfume_images50/perfume_5.jpg
+
+
+======================================================
+CATEGORY 2: Warm & Earthy Collection
+(Amber, Golden, Vetiver, Bronze, Copper, Dawn)
+======================================================
+
+11. Amber Dusk
+- Description: An intoxicating Extrait de Parfum that captures the essence of golden hour. Warm amber, crushed coriander, and Madagascar vanilla blend seamlessly with a hint of smoky woods.
+- Price Amount: 240.00
+- Currency: USD
+- Images: perfume_images50/perfume_2.jpg
+
+12. Amber Musk
+- Description: A simple yet profound blend of warm, glowing amber and a soft, enveloping musk.
+- Price Amount: 140.00
+- Currency: USD
+- Images: perfume_images50/perfume_32.jpg
+
+13. Golden Wood
+- Description: A warm, earthy fragrance featuring golden sandalwood, cedar, and a touch of sweet amber resin.
+- Price Amount: 215.00
+- Currency: USD
+- Images: perfume_images50/perfume_8.jpg
+
+14. Golden Day
+- Description: A radiant scent filled with golden mimosa, ylang-ylang, and a warm, sun-drenched sandalwood base.
+- Price Amount: 170.00
+- Currency: USD
+- Images: perfume_images50/perfume_38.jpg
+
+15. Vetiver Blanc
+- Description: A crisp, minimalist fragrance perfect for daytime. Bright bergamot and Haitian vetiver dry down to a clean, white musk that lingers close to the skin.
+- Price Amount: 145.00
+- Currency: USD
+- Images: perfume_images50/perfume_4.jpg
+
+16. Vetiver Petal
+- Description: An unusual pairing of earthy vetiver root with the delicate softness of crushed flower petals.
+- Price Amount: 150.00
+- Currency: USD
+- Images: perfume_images50/perfume_34.jpg
+
+17. Bronze Forest
+- Description: A deep, resinous fragrance capturing an ancient forest, with notes of oakmoss, fir balsam, and bronze amber.
+- Price Amount: 170.00
+- Currency: USD
+- Images: perfume_images50/perfume_23.jpg
+
+18. Copper Mountain
+- Description: A warm, rugged scent with dry woods, roasted nuts, and a touch of metallic copper accord.
+- Price Amount: 160.00
+- Currency: USD
+- Images: perfume_images50/perfume_24.jpg
+
+19. Dawn Fire
+- Description: A fiery and passionate fragrance with spicy cinnamon, red pepper, and a base of glowing amber.
+- Price Amount: 180.00
+- Currency: USD
+- Images: perfume_images50/perfume_17.jpg
+
+20. Dawn Jasmine
+- Description: A fresh, dewy scent capturing jasmine flowers blooming at first light, mixed with green leaves.
+- Price Amount: 150.00
+- Currency: USD
+- Images: perfume_images50/perfume_47.jpg
+
+
+======================================================
+CATEGORY 3: Fresh & Natural Collection
+(Azure, Emerald, Sapphire, Crystal, Crimson, Silk Breeze)
+======================================================
+
+21. Azure Breeze
+- Description: A refreshing oceanic scent with notes of sea salt, blue lotus, and a cool breeze of cucumber and melon.
+- Price Amount: 120.00
+- Currency: USD
+- Images: perfume_images50/perfume_7.jpg
+
+22. Azure Night
+- Description: A cool, calm fragrance capturing a starry night sky with blue lavender, chamomile, and dark woods.
+- Price Amount: 160.00
+- Currency: USD
+- Images: perfume_images50/perfume_37.jpg
+
+23. Emerald Earth
+- Description: A lush, green scent featuring crushed mint leaves, basil, and a deep earthy vetiver base.
+- Price Amount: 150.00
+- Currency: USD
+- Images: perfume_images50/perfume_18.jpg
+
+24. Emerald Musk
+- Description: A unique green musk fragrance with notes of galbanum, fig leaf, and a soft, powdery musk base.
+- Price Amount: 175.00
+- Currency: USD
+- Images: perfume_images50/perfume_48.jpg
+
+25. Sapphire Wind
+- Description: A breezy, uplifting fragrance with notes of crisp apple, freesia, and a light, airy musk.
+- Price Amount: 130.00
+- Currency: USD
+- Images: perfume_images50/perfume_19.jpg
+
+26. Sapphire Wood
+- Description: A cool, elegant woody scent featuring blue cedar, juniper berries, and a crisp, airy finish.
+- Price Amount: 185.00
+- Currency: USD
+- Images: perfume_images50/perfume_49.jpg
+
+27. Crystal Snow
+- Description: A crisp and cooling scent with peppermint, frosted pine, and a clear, icy musk base.
+- Price Amount: 125.00
+- Currency: USD
+- Images: perfume_images50/perfume_15.jpg
+
+28. Crystal Amber
+- Description: A transparent, modern take on amber, featuring clear resin notes, white musk, and sparkling citrus.
+- Price Amount: 145.00
+- Currency: USD
+- Images: perfume_images50/perfume_45.jpg
+
+29. Crimson Petal
+- Description: A rich, romantic blend of crimson rose petals and sweet vanilla bean, balanced with a subtle hint of white musk.
+- Price Amount: 160.00
+- Currency: USD
+- Images: perfume_images50/perfume_6.jpg
+
+30. Silk Breeze
+- Description: A smooth, flowing fragrance with notes of sheer silk accord, white tea, and a gentle summer breeze.
+- Price Amount: 135.00
+- Currency: USD
+- Images: perfume_images50/perfume_35.jpg
+
+
+======================================================
+CATEGORY 4: Celestial & Luminous Collection
+(Lunar, Solar, Opal, Diamond, Pearl, Royal)
+======================================================
+
+31. Lunar Sky
+- Description: A celestial blend of night-blooming jasmine, white tea, and a soft base of cashmere wood.
+- Price Amount: 175.00
+- Currency: USD
+- Images: perfume_images50/perfume_11.jpg
+
+32. Lunar Sun
+- Description: An intriguing paradox of cool lunar jasmine and warm, solar amber, creating a perfectly balanced scent.
+- Price Amount: 200.00
+- Currency: USD
+- Images: perfume_images50/perfume_41.jpg
+
+33. Solar Day
+- Description: A vibrant and sunny fragrance with notes of Sicilian lemon, orange blossom, and a hint of warm sand.
+- Price Amount: 135.00
+- Currency: USD
+- Images: perfume_images50/perfume_12.jpg
+
+34. Solar Sky
+- Description: A bright, uplifting fragrance with ozonic notes, sunny mandarin, and a crisp, clean finish.
+- Price Amount: 125.00
+- Currency: USD
+- Images: perfume_images50/perfume_42.jpg
+
+35. Opal Star
+- Description: A bright and sparkling fragrance with star anise, sweet pear, and a luminous opal musk.
+- Price Amount: 155.00
+- Currency: USD
+- Images: perfume_images50/perfume_10.jpg
+
+36. Opal Moon
+- Description: A pale, shimmering scent with white lotus, pearlescent musk, and a soft, milky sandalwood.
+- Price Amount: 155.00
+- Currency: USD
+- Images: perfume_images50/perfume_40.jpg
+
+37. Diamond Orchid
+- Description: A brilliant, multifaceted floral fragrance with rare white orchids, sparkling aldehydes, and pure crystal musk.
+- Price Amount: 300.00
+- Currency: USD
+- Images: perfume_images50/perfume_27.jpg
+
+38. Pearl Dusk
+- Description: A soft, luminous scent featuring creamy tuberose, coconut milk, and a delicate pearl essence.
+- Price Amount: 185.00
+- Currency: USD
+- Images: perfume_images50/perfume_28.jpg
+
+39. Royal Cloud
+- Description: An airy, regal scent featuring white peony, iris, and a fluffy cloud of white musk and heliotrope.
+- Price Amount: 205.00
+- Currency: USD
+- Images: perfume_images50/perfume_13.jpg
+
+40. Royal Orchid
+- Description: A majestic, commanding floral featuring purple orchids, dark patchouli, and a rich, golden amber.
+- Price Amount: 245.00
+- Currency: USD
+- Images: perfume_images50/perfume_43.jpg
+
+
+======================================================
+CATEGORY 5: Bold & Elemental Collection
+(Ruby, Silver, Platinum, Iron, Steel, Mystic, Ivory, Crimson Ocean)
+======================================================
+
+41. Ruby Storm
+- Description: An intense, powerful scent with dark cherry, pomegranate, and a stormy base of patchouli and leather.
+- Price Amount: 225.00
+- Currency: USD
+- Images: perfume_images50/perfume_20.jpg
+
+42. Ruby Oud
+- Description: An opulent, rich fragrance with dark red roses, precious oud wood, and a sweet, syrupy date note.
+- Price Amount: 380.00
+- Currency: USD
+- Images: perfume_images50/perfume_50.jpg
+
+43. Silver Thunder
+- Description: A striking and metallic fragrance with cold spices, ozone, and a rumbling base of dark cedarwood.
+- Price Amount: 190.00
+- Currency: USD
+- Images: perfume_images50/perfume_21.jpg
+
+44. Platinum Lightning
+- Description: An electrifying scent with sharp citrus, white pepper, and a sleek, modern musk.
+- Price Amount: 210.00
+- Currency: USD
+- Images: perfume_images50/perfume_22.jpg
+
+45. Iron River
+- Description: A strong, unyielding fragrance featuring cool aquatic notes over a base of ironwood and tonka bean.
+- Price Amount: 145.00
+- Currency: USD
+- Images: perfume_images50/perfume_25.jpg
+
+46. Steel Sea
+- Description: A bracing marine scent with sea spray, kelp, and a sharp, steely musk that lasts for hours.
+- Price Amount: 155.00
+- Currency: USD
+- Images: perfume_images50/perfume_26.jpg
+
+47. Mystic Rain
+- Description: A fresh, ozonic fragrance that captures the scent of rain on dry earth, blended with violet leaves and petrichor.
+- Price Amount: 140.00
+- Currency: USD
+- Images: perfume_images50/perfume_14.jpg
+
+48. Mystic Sandalwood
+- Description: A spiritual, calming scent with premium Indian sandalwood, incense, and a touch of myrrh.
+- Price Amount: 215.00
+- Currency: USD
+- Images: perfume_images50/perfume_44.jpg
+
+49. Ivory Rose
+- Description: A pure and classic fragrance with white roses, lily of the valley, and a smooth ivory wood base.
+- Price Amount: 175.00
+- Currency: USD
+- Images: perfume_images50/perfume_29.jpg
+
+50. Crimson Ocean
+- Description: A daring aquatic scent with notes of red coral, sea salt, and a deep, crimson hibiscus.
+- Price Amount: 180.00
+- Currency: USD
+- Images: perfume_images50/perfume_36.jpg
