@@ -3,17 +3,18 @@ import { useParams, useNavigate } from "react-router";
 import useProduct from "../../hooks/useProduct.js";
 import useCart from "../../../cart/hooks/useCart.js";
 
-const exchangeRates = {
-  USD: 1,
-  EUR: 0.87,
-  GBP: 0.75,
-};
+const LUXURY_STYLES = `
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap');
+  .font-serif-luxury { font-family: 'Cormorant Garamond', Georgia, serif; }
+  .font-sans-luxury  { font-family: 'Inter', system-ui, sans-serif; }
+  details > summary { list-style: none; }
+  details > summary::-webkit-details-marker { display: none; }
+  details[open] .acc-icon { transform: rotate(45deg); }
+  .acc-icon { transition: transform 0.3s; display: inline-block; }
+`;
 
-const symbols = {
-  USD: "$",
-  EUR: "€",
-  GBP: "£",
-};
+const exchangeRates = { USD: 1, EUR: 0.87, GBP: 0.75 };
+const symbols = { USD: "$", EUR: "€", GBP: "£" };
 
 const ProductDetailById = () => {
   const { id } = useParams();
@@ -26,95 +27,122 @@ const ProductDetailById = () => {
   const [currency, setCurrency] = useState("USD");
   const [quantity, setQuantity] = useState(1);
   const [selectedVariant, setSelectedVariant] = useState(null);
+  const [added, setAdded] = useState(false);
 
   useEffect(() => {
     const fetchProduct = async () => {
       const data = await handleGetProductById(id);
-
-      const safeData = {
-        ...data,
-        images: data?.images ?? [],
-        variants: data?.variants ?? [],
-      };
-
+      const safeData = { ...data, images: data?.images ?? [], variants: data?.variants ?? [] };
       setProduct(safeData);
       setSelectedImage(safeData.images?.[0]?.url || "");
       setCurrency(safeData.price?.currency || "USD");
-      if (safeData.variants.length > 0) {
-        setSelectedVariant(safeData.variants[0]);
-      }
+      if (safeData.variants.length > 0) setSelectedVariant(safeData.variants[0]);
     };
-
     fetchProduct();
   }, [id]);
 
   if (!product) {
     return (
-      <div className="h-screen flex justify-center items-center text-stone-500 bg-[#FAF9F6] dark:bg-[#0a0a0a]">
-        <div className="animate-pulse tracking-[0.2em] uppercase text-sm">Discovering...</div>
+      <div className="min-h-screen bg-[#0c0b09] flex flex-col items-center justify-center gap-6">
+        <style>{LUXURY_STYLES}</style>
+        <span className="text-stone-700 text-3xl animate-pulse">✦</span>
+        <p className="font-sans-luxury text-[10px] tracking-[0.5em] uppercase text-stone-500 animate-pulse">
+          Discovering...
+        </p>
       </div>
     );
   }
 
-  // PRICE LOGIC
   const activePrice = selectedVariant?.price?.amount ?? product.price?.amount ?? 0;
   const activeCurrency = selectedVariant?.price?.currency ?? product.price?.currency ?? "USD";
   const convertedPrice = (activePrice * (exchangeRates[currency] || 1) / (exchangeRates[activeCurrency] || 1)).toFixed(2);
 
+  const handleAddAndAnimate = () => {
+    handleAddToCart({ productId: product._id, variantId: selectedVariant?._id, quantity });
+    setAdded(true);
+    setTimeout(() => setAdded(false), 2000);
+  };
+
   return (
-    <div className="bg-[#FAF9F6] dark:bg-[#0a0a0a] min-h-screen font-sans text-stone-900 dark:text-stone-100 selection:bg-stone-200 dark:selection:bg-stone-800 pb-24">
-      <div className="max-w-[1400px] mx-auto px-6 pt-12 md:pt-20">
-        
-        {/* TOP SECTION: Image + Buy Card */}
-        <div className="grid lg:grid-cols-12 gap-12 lg:gap-24 mb-24">
-          
-          {/* LEFT: Image Area */}
-          <div className="lg:col-span-7 flex flex-col items-center">
-            <div className="w-full flex justify-center items-center h-[500px] md:h-[700px]">
+    <div className="min-h-screen bg-[#0c0b09] text-stone-100">
+      <style>{LUXURY_STYLES}</style>
+
+      {/* ─── BACK NAV ─── */}
+      <div className="fixed top-20 left-8 z-50 hidden md:block">
+        <button
+          onClick={() => navigate(-1)}
+          className="font-sans-luxury text-[9px] tracking-[0.4em] uppercase text-stone-600 hover:text-stone-300 transition-colors flex items-center gap-2"
+        >
+          ← Back
+        </button>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-6 md:px-16 pt-28 pb-32">
+
+        {/* ─── MAIN GRID ─── */}
+        <div className="grid lg:grid-cols-12 gap-12 lg:gap-24 mb-28">
+
+          {/* LEFT — Image Gallery */}
+          <div className="lg:col-span-7 flex flex-col">
+            {/* Main Image */}
+            <div className="relative w-full aspect-[4/5] overflow-hidden bg-[#111009] flex items-center justify-center mb-4">
               <img
-                src={selectedVariant?.images?.[0]?.url || selectedImage || "https://images.unsplash.com/photo-1594035910387-fea47794261f?q=80&w=800"}
+                src={selectedVariant?.images?.[0]?.url || selectedImage || "https://images.unsplash.com/photo-1594035910387-fea47794261f?q=80&w=1000"}
                 alt={product.title}
-                className="max-h-full object-contain mix-blend-multiply dark:mix-blend-normal drop-shadow-2xl"
+                className="w-full h-full object-cover opacity-90 hover:opacity-100 hover:scale-[1.02] transition-all duration-700"
               />
+              {/* Subtle corner tag */}
+              <div className="absolute top-5 left-5 font-sans-luxury text-[8px] tracking-widest uppercase text-stone-400 bg-[#0c0b09]/60 backdrop-blur-sm px-2 py-1">
+                Eau de Parfum
+              </div>
             </div>
+
             {/* Thumbnails */}
             {product.images.length > 1 && (
-              <div className="flex gap-6 mt-8">
+              <div className="flex gap-3">
                 {product.images.map((image) => (
                   <button
                     key={image._id}
-                    onClick={() => {
-                      setSelectedImage(image.url);
-                      setSelectedVariant(null);
-                    }}
-                    className={`w-16 h-20 bg-white dark:bg-stone-900 flex items-center justify-center p-2 border transition-all ${
-                      selectedImage === image.url ? 'border-stone-900 dark:border-stone-100' : 'border-transparent hover:border-stone-300'
+                    onClick={() => { setSelectedImage(image.url); setSelectedVariant(null); }}
+                    className={`w-16 h-20 overflow-hidden transition-all duration-300 ${
+                      selectedImage === image.url
+                        ? "opacity-100 ring-1 ring-white/30"
+                        : "opacity-40 hover:opacity-70"
                     }`}
                   >
-                    <img src={image.url} className="w-full h-full object-contain mix-blend-multiply dark:mix-blend-normal" />
+                    <img src={image.url} className="w-full h-full object-cover" alt="" />
                   </button>
                 ))}
               </div>
             )}
           </div>
 
-          {/* RIGHT: Floating Buy Card */}
-          <div className="lg:col-span-5 relative">
-            <div className="bg-white dark:bg-[#121212] rounded-3xl p-8 md:p-10 shadow-sm border border-stone-100 dark:border-stone-800 sticky top-32">
-              
-              <div className="flex justify-between items-start mb-2">
-                <div>
-                  <h1 className="text-3xl font-serif tracking-wide text-stone-900 dark:text-stone-100">{product.title}</h1>
-                  <p className="text-stone-500 text-xs tracking-widest uppercase mt-2">Eau de Parfum</p>
-                </div>
-                <div className="text-right flex flex-col items-end">
-                  <h2 className="text-2xl font-sans font-light tracking-wide text-stone-900 dark:text-stone-100">
-                    {symbols[currency]}{convertedPrice}
-                  </h2>
-                  <select 
-                    value={currency} 
-                    onChange={e => setCurrency(e.target.value)}
-                    className="text-[10px] uppercase tracking-widest bg-transparent text-stone-400 focus:outline-none cursor-pointer mt-1"
+          {/* RIGHT — Product Info */}
+          <div className="lg:col-span-5">
+            <div className="sticky top-28">
+
+              {/* Title & Price */}
+              <div className="mb-8 pb-8 border-b border-stone-800">
+                <p className="font-sans-luxury text-[9px] tracking-[0.5em] uppercase text-stone-500 mb-4">
+                  Still · Maison de Parfum
+                </p>
+                <h1
+                  className="font-serif-luxury text-4xl md:text-5xl uppercase text-white leading-tight mb-6"
+                  style={{ fontWeight: 300 }}
+                >
+                  {product.title}
+                </h1>
+                <div className="flex items-end justify-between">
+                  <div>
+                    <p className="font-sans-luxury text-2xl text-stone-100 tracking-wide">
+                      {symbols[currency]}{convertedPrice}
+                    </p>
+                  </div>
+                  <select
+                    value={currency}
+                    onChange={(e) => setCurrency(e.target.value)}
+                    className="font-sans-luxury text-[9px] uppercase tracking-widest bg-transparent text-stone-500 hover:text-stone-300 focus:outline-none cursor-pointer border-b border-stone-800 pb-1 transition-colors"
+                    style={{ background: "#0c0b09" }}
                   >
                     <option value="USD">USD</option>
                     <option value="EUR">EUR</option>
@@ -123,132 +151,139 @@ const ProductDetailById = () => {
                 </div>
               </div>
 
-              <p className="text-stone-600 dark:text-stone-400 text-sm leading-relaxed mb-8 mt-6">
+              {/* Description */}
+              <p className="font-sans-luxury text-stone-400 text-sm leading-relaxed tracking-wide mb-10">
                 {product.description}
               </p>
 
               {/* Variants */}
               {product.variants.length > 0 && (
-                <div className="mb-8">
-                  <p className="text-[10px] tracking-widest uppercase text-stone-400 mb-3">Volume</p>
+                <div className="mb-10">
+                  <p className="font-sans-luxury text-[9px] tracking-[0.5em] uppercase text-stone-500 mb-4">Volume</p>
                   <div className="flex flex-wrap gap-3">
                     {product.variants.map((variant) => (
                       <button
                         key={variant._id}
                         onClick={() => setSelectedVariant(variant)}
-                        className={`px-5 py-2.5 text-[10px] uppercase tracking-widest border rounded-full transition-all duration-300 ${
+                        className={`font-sans-luxury px-5 py-2.5 text-[9px] uppercase tracking-widest border transition-all duration-300 ${
                           selectedVariant?._id === variant._id
-                            ? "border-stone-900 bg-stone-900 text-white dark:border-stone-100 dark:bg-stone-100 dark:text-stone-900"
-                            : "border-stone-200 text-stone-600 hover:border-stone-400 dark:border-stone-700 dark:text-stone-400"
+                            ? "border-white/60 text-white bg-white/5"
+                            : "border-stone-800 text-stone-500 hover:border-stone-600 hover:text-stone-300"
                         }`}
                       >
-                        {variant.attributes?.size || variant.attributes?.color || 'Standard'}
+                        {variant.attributes?.size || variant.attributes?.color || "Standard"}
                       </button>
                     ))}
                   </div>
                 </div>
               )}
 
-              {/* Quantity & Action */}
-              <div className="flex gap-4 mb-8">
-                <button
-                  onClick={() => handleAddToCart({ productId: product._id, variantId: selectedVariant?._id, quantity })}
-                  className="w-full h-full py-5 bg-stone-900 dark:bg-stone-100 text-white dark:text-stone-900 text-[10px] tracking-[0.2em] uppercase rounded-xl hover:bg-black dark:hover:bg-white transition-all shadow-lg hover:shadow-xl dark:shadow-stone-900/50 cursor-pointer "
-                >
-                  Add to Cart
-                </button>
-              </div>
+              {/* Add to Cart */}
+              <button
+                onClick={handleAddAndAnimate}
+                className={`font-sans-luxury w-full py-5 text-[9px] tracking-[0.5em] uppercase border transition-all duration-500 mb-10 ${
+                  added
+                    ? "border-stone-300 text-white bg-stone-800/40"
+                    : "border-stone-700 text-stone-300 hover:border-stone-300 hover:text-white hover:bg-stone-800/20"
+                }`}
+              >
+                {added ? "✓ Added to Cart" : "Add to Cart"}
+              </button>
 
               {/* Accordions */}
-              <div className="border-t border-stone-100 dark:border-stone-800 pt-2">
-                <details className="group cursor-pointer py-4 border-b border-stone-100 dark:border-stone-800">
-                  <summary className="flex justify-between items-center text-[10px] tracking-widest uppercase text-stone-600 dark:text-stone-400 list-none [&::-webkit-details-marker]:hidden">
-                    How it works <span className="transition group-open:rotate-45 text-stone-400">+</span>
-                  </summary>
-                  <p className="text-sm text-stone-500 leading-relaxed pt-4 pb-2">
-                    Spray generously onto pulse points. Avoid rubbing the fragrance into the skin as it alters the scent notes.
-                  </p>
-                </details>
-                <details className="group cursor-pointer py-4 border-b border-stone-100 dark:border-stone-800">
-                  <summary className="flex justify-between items-center text-[10px] tracking-widest uppercase text-stone-600 dark:text-stone-400 list-none [&::-webkit-details-marker]:hidden">
-                    Shipping & Returns <span className="transition group-open:rotate-45 text-stone-400">+</span>
-                  </summary>
-                  <p className="text-sm text-stone-500 leading-relaxed pt-4 pb-2">
-                    Complimentary standard shipping and returns. We also offer express and overnight shipping options at checkout.
-                  </p>
-                </details>
+              <div className="border-t border-stone-800">
+                {[
+                  {
+                    title: "How it works",
+                    body: "Spray generously onto pulse points. Avoid rubbing the fragrance into the skin as it alters the scent notes. Reapply as desired throughout the day.",
+                  },
+                  {
+                    title: "Shipping & Returns",
+                    body: "Complimentary standard shipping and returns on all orders. Express and overnight options available at checkout.",
+                  },
+                  {
+                    title: "Ingredients",
+                    body: "All fragrances are crafted with the finest ethically sourced ingredients. Full ingredient list available on request.",
+                  },
+                ].map((item, i) => (
+                  <details key={i} className="group border-b border-stone-800 py-4 cursor-pointer">
+                    <summary className="flex justify-between items-center">
+                      <span className="font-sans-luxury text-[9px] tracking-[0.4em] uppercase text-stone-400 group-hover:text-stone-200 transition-colors">
+                        {item.title}
+                      </span>
+                      <span className="acc-icon text-stone-600 text-sm font-light group-hover:text-stone-300 transition-colors">+</span>
+                    </summary>
+                    <p className="font-sans-luxury text-stone-500 text-xs leading-relaxed tracking-wide pt-4 pb-1">
+                      {item.body}
+                    </p>
+                  </details>
+                ))}
               </div>
-
             </div>
           </div>
         </div>
 
-        {/* MIDDLE SECTION: Scent Intel & Composition Cards */}
-        <div className="grid md:grid-cols-3 gap-6 mb-24">
-          
+        {/* ─── SCENT PROFILE ROW ─── */}
+        <div className="grid md:grid-cols-3 gap-px bg-stone-800">
           {/* Card 1: Scent Intel */}
-          <div className="bg-white dark:bg-[#121212] p-8 rounded-3xl shadow-sm border border-stone-100 dark:border-stone-800">
-            <h3 className="text-xs tracking-[0.2em] uppercase font-semibold mb-6">Scent Intel</h3>
-            <ul className="space-y-4 text-sm">
-              <li className="flex justify-between border-b border-stone-100 dark:border-stone-800 pb-3">
-                <span className="text-stone-400 flex items-center gap-2"><svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.315 48.315 0 0 0 12 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75Z" /></svg> Brand</span>
-                <span className="text-stone-800 dark:text-stone-200 text-right">Still</span>
-              </li>
-              <li className="flex justify-between border-b border-stone-100 dark:border-stone-800 pb-3">
-                <span className="text-stone-400 flex items-center gap-2"><svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M2.25 15a4.5 4.5 0 0 0 4.5 4.5H18a3.75 3.75 0 0 0 1.332-7.257 3 3 0 0 0-3.758-3.848 5.25 5.25 0 0 0-10.233 2.33A4.502 4.502 0 0 0 2.25 15Z" /></svg> Concentration</span>
-                <span className="text-stone-800 dark:text-stone-200 text-right">Eau de Parfum</span>
-              </li>
-              <li className="flex justify-between border-b border-stone-100 dark:border-stone-800 pb-3">
-                <span className="text-stone-400 flex items-center gap-2"><svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" /></svg> Gender</span>
-                <span className="text-stone-800 dark:text-stone-200 text-right">Unisex</span>
-              </li>
-            </ul>
+          <div className="bg-[#0c0b09] p-10">
+            <p className="font-sans-luxury text-[9px] tracking-[0.5em] uppercase text-stone-500 mb-8">
+              Fragrance Profile
+            </p>
+            <div className="space-y-5">
+              {[
+                { label: "Brand", value: "Still" },
+                { label: "Concentration", value: "Eau de Parfum" },
+                { label: "Gender", value: "Unisex" },
+                { label: "Longevity", value: "8–12 hours" },
+              ].map((row, i) => (
+                <div key={i} className="flex justify-between items-center border-b border-stone-800 pb-5">
+                  <span className="font-sans-luxury text-[9px] tracking-widest uppercase text-stone-600">{row.label}</span>
+                  <span className="font-sans-luxury text-xs text-stone-300">{row.value}</span>
+                </div>
+              ))}
+            </div>
           </div>
 
-          {/* Card 2: Composition */}
-          <div className="bg-white dark:bg-[#121212] p-8 rounded-3xl shadow-sm border border-stone-100 dark:border-stone-800 text-center flex flex-col items-center">
-            <h3 className="text-xs tracking-[0.2em] uppercase font-semibold mb-4 self-start">Composition</h3>
-            <p className="text-[10px] uppercase tracking-widest text-stone-400 mb-8 self-start text-left leading-relaxed">Warning: ingredients are updated regularly. This is a general olfactory pyramid.</p>
-            
-            <div className="flex flex-col items-center justify-center w-full max-w-[200px] mt-auto">
-              <div className="w-full text-center border-b border-stone-100 dark:border-stone-800 pb-3 mb-3">
-                <p className="text-[10px] tracking-widest uppercase text-stone-400 mb-1">Top Notes</p>
-                <p className="text-sm font-medium text-stone-800 dark:text-stone-200">Cardamom</p>
-              </div>
-              <div className="w-full text-center border-b border-stone-100 dark:border-stone-800 pb-3 mb-3">
-                <p className="text-[10px] tracking-widest uppercase text-stone-400 mb-1">Heart Notes</p>
-                <p className="text-sm font-medium text-stone-800 dark:text-stone-200">Lavender, Iris</p>
-              </div>
-              <div className="w-full text-center pb-2">
-                <p className="text-[10px] tracking-widest uppercase text-stone-400 mb-1">Base Notes</p>
-                <p className="text-sm font-medium text-stone-800 dark:text-stone-200">Vanilla, Wood</p>
-              </div>
+          {/* Card 2: Olfactory Pyramid */}
+          <div className="bg-[#0c0b09] p-10 flex flex-col">
+            <p className="font-sans-luxury text-[9px] tracking-[0.5em] uppercase text-stone-500 mb-8">
+              Olfactory Pyramid
+            </p>
+            <div className="flex-1 flex flex-col gap-6 justify-center">
+              {[
+                { label: "Top Notes", notes: "Cardamom, Bergamot" },
+                { label: "Heart Notes", notes: "Lavender, Iris, Rose" },
+                { label: "Base Notes", notes: "Vanilla, Sandalwood, Musk" },
+              ].map((tier, i) => (
+                <div key={i}>
+                  <p className="font-sans-luxury text-[8px] tracking-[0.4em] uppercase text-stone-600 mb-1">{tier.label}</p>
+                  <p className="font-serif-luxury text-base text-stone-300 italic" style={{ fontWeight: 300 }}>{tier.notes}</p>
+                </div>
+              ))}
             </div>
           </div>
 
           {/* Card 3: Reviews */}
-          <div className="bg-white dark:bg-[#121212] p-8 rounded-3xl shadow-sm border border-stone-100 dark:border-stone-800">
-            <div className="flex items-center gap-6 mb-8 border-b border-stone-100 dark:border-stone-800 pb-6">
-              <div className="text-5xl font-serif text-stone-900 dark:text-stone-100">4.5</div>
+          <div className="bg-[#0c0b09] p-10">
+            <div className="flex items-start gap-5 mb-8 pb-8 border-b border-stone-800">
+              <p className="font-serif-luxury text-5xl text-white" style={{ fontWeight: 300 }}>4.5</p>
               <div>
-                <div className="flex text-stone-800 dark:text-stone-200 mb-1">
-                  ★★★★<span className="text-stone-300 dark:text-stone-700">★</span>
+                <div className="flex text-stone-300 text-sm mb-1">
+                  ★★★★<span className="text-stone-700">★</span>
                 </div>
-                <p className="text-[10px] text-stone-400 uppercase tracking-widest">128 Reviews</p>
+                <p className="font-sans-luxury text-[9px] tracking-widest uppercase text-stone-600">128 Reviews</p>
               </div>
             </div>
-            
-            <div className="space-y-4">
-              <div className="bg-[#FAF9F6] dark:bg-[#0a0a0a] p-5 rounded-2xl">
-                <div className="flex text-[10px] mb-3 text-stone-800 dark:text-stone-200">★★★★★</div>
-                <p className="text-xs leading-relaxed text-stone-600 dark:text-stone-400 italic">"Absolutely stunning fragrance. It stays on my skin all day and the dry down is magical."</p>
-                <p className="text-[10px] uppercase tracking-widest text-stone-400 mt-4">— Sophie T.</p>
-              </div>
+            <div className="border border-stone-800 p-5 bg-[#0f0e0b]">
+              <div className="flex text-[10px] text-stone-300 mb-3">★★★★★</div>
+              <p className="font-sans-luxury text-xs leading-relaxed text-stone-400 italic mb-4">
+                "Absolutely stunning fragrance. It stays on my skin all day and the dry down is magical."
+              </p>
+              <p className="font-sans-luxury text-[9px] uppercase tracking-widest text-stone-600">— Sophie T.</p>
             </div>
           </div>
-
         </div>
-
       </div>
     </div>
   );

@@ -1,55 +1,67 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import useAuth from "../hooks/useAuth.js";
 import { useNavigate, Link } from "react-router";
+
+const LUXURY_STYLES = `
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap');
+  .font-serif-luxury { font-family: 'Cormorant Garamond', Georgia, serif; }
+  .font-sans-luxury  { font-family: 'Inter', system-ui, sans-serif; }
+  .luxury-input {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    color: #e7e5e4;
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 14px;
+    padding-bottom: 12px;
+    outline: none;
+    width: 100%;
+    transition: border-color 0.3s;
+    letter-spacing: 0.04em;
+  }
+  .luxury-input::placeholder { color: rgba(255,255,255,0.2); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; }
+  .luxury-input:focus { border-bottom-color: rgba(255,255,255,0.45); }
+  .luxury-select {
+    background: #0c0b09;
+    border: none;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    color: #a8a29e;
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 11px;
+    padding-bottom: 12px;
+    outline: none;
+    width: 100%;
+    cursor: pointer;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    appearance: none;
+  }
+  .luxury-select option { background: #0c0b09; }
+  .role-btn { border: 1px solid rgba(255,255,255,0.1); padding: 10px 20px; font-size: 9px; letter-spacing: 0.4em; text-transform: uppercase; cursor: pointer; transition: all 0.3s; color: #78716c; }
+  .role-btn.active { border-color: rgba(255,255,255,0.5); color: #e7e5e4; background: rgba(255,255,255,0.04); }
+  .role-btn:hover:not(.active) { border-color: rgba(255,255,255,0.3); color: #a8a29e; }
+`;
 
 const Register = () => {
   const { handleRegister } = useAuth();
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    password: "",
-    contact: "",
-    role: "buyer",
+    name: "", email: "", password: "", contact: "", role: "buyer",
   });
-
   const [loading, setLoading] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  useEffect(() => {
-    setIsDarkMode(document.documentElement.classList.contains("dark"));
-  }, []);
-
-  const toggleDarkMode = () => {
-    document.documentElement.classList.toggle("dark");
-    setIsDarkMode((prev) => !prev);
-  };
 
   const handleChange = (e) => {
-    setFormData((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
+    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
   const onSubmit = async (e) => {
     e.preventDefault();
-
     try {
       setLoading(true);
       const result = await handleRegister(formData);
-      if (result.success) {
-        navigate("/");
-      }
-
-      setFormData({
-        name: "",
-        email: "",
-        password: "",
-        contact: "",
-        role: "buyer",
-      });
+      if (result.success) navigate("/");
+      setFormData({ name: "", email: "", password: "", contact: "", role: "buyer" });
     } catch (error) {
       console.log(error);
     } finally {
@@ -58,141 +70,131 @@ const Register = () => {
   };
 
   return (
-    <div className="min-h-screen flex font-sans text-stone-900 dark:text-stone-100 bg-white dark:bg-[#0a0a0a] selection:bg-stone-200 dark:selection:bg-stone-800 relative">
-      {/* Dark Mode Toggle Button */}
-      <button 
-        onClick={toggleDarkMode}
-        className="absolute top-6 right-6 z-50 p-2 rounded-full bg-stone-100 dark:bg-stone-900 text-stone-800 dark:text-stone-100 hover:bg-stone-200 dark:hover:bg-stone-800 transition-colors shadow-sm"
-        aria-label="Toggle Dark Mode"
-      >
-        {isDarkMode ? (
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" />
-          </svg>
-        ) : (
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z" />
-          </svg>
-        )}
-      </button>
+    <div className="min-h-screen flex bg-[#0c0b09] text-stone-100">
+      <style>{LUXURY_STYLES}</style>
 
-      {/* Left Image Section - Hidden on smaller screens */}
-      <div className="hidden lg:flex lg:w-1/2 relative bg-stone-900 dark:bg-black items-center justify-center overflow-hidden">
+      {/* ─── LEFT — IMAGE ─── */}
+      <div className="hidden lg:block lg:w-1/2 relative overflow-hidden">
         <img
           src="https://images.unsplash.com/photo-1594035910387-fea47794261f?q=80&w=1200&auto=format&fit=crop"
-          alt="Luxury Perfume"
-          className="absolute inset-0 w-full h-full object-cover opacity-60 dark:opacity-40 hover:scale-105 transition-transform duration-[2000ms] ease-out"
+          alt="Still"
+          className="absolute inset-0 w-full h-full object-cover opacity-35 hover:scale-105 transition-transform duration-[4000ms] ease-out"
         />
-        <div className="z-10 text-center text-white px-8 pointer-events-none">
-          <h2 className="text-5xl md:text-6xl font-serif tracking-[0.2em] uppercase mb-4 drop-shadow-lg">
+        <div className="absolute inset-0 bg-gradient-to-r from-transparent to-[#0c0b09]" />
+        <div className="absolute inset-0 flex flex-col items-center justify-center text-white pointer-events-none">
+          <p className="font-sans-luxury text-[9px] tracking-[0.6em] uppercase text-stone-400 mb-6">
+            Maison de Parfum · Est. 2024
+          </p>
+          <h2
+            className="font-serif-luxury text-7xl md:text-8xl uppercase leading-none"
+            style={{ fontWeight: 300 }}
+          >
             Still
           </h2>
-          <p className="text-sm tracking-[0.3em] font-light uppercase opacity-90 drop-shadow-md">
+          <div className="w-px h-12 bg-gradient-to-b from-transparent via-stone-500 to-transparent mt-6 mb-6" />
+          <p className="font-sans-luxury text-[9px] tracking-[0.5em] uppercase text-stone-400">
             Discover your signature scent
           </p>
         </div>
       </div>
 
-      {/* Right Form Section */}
-      <div className="w-full lg:w-1/2 flex items-center justify-center p-6 sm:p-12 md:p-16 lg:p-24 bg-[#FAF9F6] dark:bg-[#0a0a0a]">
-        <div className="w-full max-w-md">
-          <div className="text-center mb-12 sm:mb-16">
-            <h1 className="text-3xl md:text-4xl font-serif tracking-wide mb-4 text-stone-800 dark:text-stone-100">
-              Create Account
-            </h1>
-            <p className="text-stone-500 dark:text-stone-400 text-xs tracking-[0.2em] uppercase">
-              Join the exclusive club
-            </p>
+      {/* ─── RIGHT — FORM ─── */}
+      <div className="w-full lg:w-1/2 flex items-center justify-center px-8 sm:px-16 md:px-24 py-16">
+        <div className="w-full max-w-sm">
+
+          {/* Mobile logo */}
+          <div className="lg:hidden text-center mb-14">
+            <h2
+              className="font-serif-luxury text-5xl uppercase text-white"
+              style={{ fontWeight: 300 }}
+            >
+              Still
+            </h2>
           </div>
 
-          <form onSubmit={onSubmit} className="space-y-8 sm:space-y-10">
-            <div className="relative group">
-              <input
-                type="text"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                placeholder="Name"
-                className="w-full bg-transparent border-b border-stone-300 dark:border-stone-800 py-3 text-sm focus:outline-none focus:border-stone-800 dark:focus:border-stone-400 transition-colors placeholder:text-stone-400 dark:placeholder:text-stone-600 placeholder:tracking-wide placeholder:uppercase placeholder:text-xs text-stone-900 dark:text-stone-100"
-                required
-              />
-            </div>
+          <p className="font-sans-luxury text-[9px] tracking-[0.5em] uppercase text-stone-500 mb-3">
+            New Member
+          </p>
+          <h1
+            className="font-serif-luxury text-4xl uppercase text-white mb-2"
+            style={{ fontWeight: 300, fontStyle: "italic" }}
+          >
+            Create Account
+          </h1>
+          <p className="font-sans-luxury text-stone-500 text-[10px] tracking-[0.3em] uppercase mb-14">
+            Join the exclusive club
+          </p>
 
-            <div className="relative group">
-              <input
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                placeholder="Email Address"
-                className="w-full bg-transparent border-b border-stone-300 dark:border-stone-800 py-3 text-sm focus:outline-none focus:border-stone-800 dark:focus:border-stone-400 transition-colors placeholder:text-stone-400 dark:placeholder:text-stone-600 placeholder:tracking-wide placeholder:uppercase placeholder:text-xs text-stone-900 dark:text-stone-100"
-                required
-              />
-            </div>
+          <form onSubmit={onSubmit} className="flex flex-col gap-8">
+            <input
+              type="text"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              placeholder="Full Name"
+              className="luxury-input"
+              required
+            />
+            <input
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              placeholder="Email Address"
+              className="luxury-input"
+              required
+            />
+            <input
+              type="password"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+              placeholder="Password"
+              className="luxury-input"
+              required
+            />
+            <input
+              type="text"
+              name="contact"
+              value={formData.contact}
+              onChange={handleChange}
+              placeholder="Contact Number"
+              className="luxury-input"
+            />
 
-            <div className="relative group">
-              <input
-                type="password"
-                name="password"
-                value={formData.password}
-                onChange={handleChange}
-                placeholder="Password"
-                className="w-full bg-transparent border-b border-stone-300 dark:border-stone-800 py-3 text-sm focus:outline-none focus:border-stone-800 dark:focus:border-stone-400 transition-colors placeholder:text-stone-400 dark:placeholder:text-stone-600 placeholder:tracking-wide placeholder:uppercase placeholder:text-xs text-stone-900 dark:text-stone-100"
-                required
-              />
-            </div>
-
-            <div className="relative group">
-              <input
-                type="text"
-                name="contact"
-                value={formData.contact}
-                onChange={handleChange}
-                placeholder="Contact Number"
-                className="w-full bg-transparent border-b border-stone-300 dark:border-stone-800 py-3 text-sm focus:outline-none focus:border-stone-800 dark:focus:border-stone-400 transition-colors placeholder:text-stone-400 dark:placeholder:text-stone-600 placeholder:tracking-wide placeholder:uppercase placeholder:text-xs text-stone-900 dark:text-stone-100"
-              />
-            </div>
-
-            <div className="relative pt-2">
-              <label className="block text-[10px] uppercase tracking-[0.2em] text-stone-400 dark:text-stone-500 mb-3">
+            {/* Role Toggle */}
+            <div>
+              <p className="font-sans-luxury text-[9px] tracking-[0.5em] uppercase text-stone-500 mb-4">
                 I am a...
-              </label>
-              <div className="relative">
-                <select
-                  name="role"
-                  value={formData.role}
-                  onChange={handleChange}
-                  className="w-full bg-transparent border-b border-stone-300 dark:border-stone-800 py-3 text-sm focus:outline-none focus:border-stone-800 dark:focus:border-stone-400 transition-colors appearance-none cursor-pointer text-stone-700 dark:text-stone-300 tracking-wide uppercase"
-                >
-                  <option value="buyer" className="dark:bg-[#0a0a0a]">Buyer</option>
-                  <option value="seller" className="dark:bg-[#0a0a0a]">Seller</option>
-                </select>
-                <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-stone-500 dark:text-stone-600">
-                  <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                    <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
-                  </svg>
-                </div>
+              </p>
+              <div className="flex gap-3">
+                {["buyer", "seller"].map((r) => (
+                  <button
+                    type="button"
+                    key={r}
+                    onClick={() => setFormData((prev) => ({ ...prev, role: r }))}
+                    className={`role-btn font-sans-luxury flex-1 ${formData.role === r ? "active" : ""}`}
+                  >
+                    {r === "buyer" ? "Buyer" : "Seller"}
+                  </button>
+                ))}
               </div>
             </div>
 
-            <div className="pt-6 sm:pt-8">
-              <button
-                disabled={loading}
-                className="w-full bg-stone-900 dark:bg-stone-100 hover:bg-black dark:hover:bg-white text-white dark:text-stone-900 uppercase tracking-[0.2em] text-xs py-4 transition-all duration-300 disabled:opacity-70 disabled:cursor-not-allowed hover:shadow-xl dark:hover:shadow-stone-800/50"
-              >
-                {loading ? "Creating Account..." : "Register"}
-              </button>
-            </div>
-            
-            <div className="text-center mt-6 sm:mt-8">
-              <p className="text-xs tracking-wider text-stone-500 dark:text-stone-400 uppercase">
-                Already have an account?{" "}
-                <Link to="/login" className="text-stone-900 dark:text-stone-100 font-medium hover:underline ml-1">
-                  Sign In
-                </Link>
-              </p>
-            </div>
+            <button
+              disabled={loading}
+              className="font-sans-luxury w-full border border-stone-700 hover:border-stone-300 text-stone-300 hover:text-white text-[9px] tracking-[0.5em] uppercase py-5 transition-all duration-300 hover:bg-stone-800/20 disabled:opacity-40 disabled:cursor-not-allowed mt-4"
+            >
+              {loading ? "Creating account..." : "Create Account"}
+            </button>
           </form>
+
+          <p className="font-sans-luxury text-center text-[9px] tracking-widest uppercase text-stone-600 mt-10">
+            Already a member?{" "}
+            <Link to="/login" className="text-stone-400 hover:text-white transition-colors border-b border-stone-700 hover:border-stone-400 pb-0.5">
+              Sign in
+            </Link>
+          </p>
         </div>
       </div>
     </div>
