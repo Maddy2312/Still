@@ -45,7 +45,6 @@ export const registerUser = async (req, res) => {
 
     await generateToken(user, res, "User registered successfully");
   } catch (error) {
-    console.log(error);
     return res.status(500).json({
       success: false,
       message: "Internal server error",
@@ -77,7 +76,6 @@ export const loginUser = async (req, res) => {
 
     await generateToken(user, res, "User logged in successfully");
   } catch (error) {
-    console.log(error);
     return res.status(500).json({
       success: false,
       message: "Internal server error",
@@ -100,7 +98,6 @@ export const getUser = async (req, res) => {
       },
     });
   } catch (error) {
-    console.log(error);
     return res.status(500).json({
       success: false,
       message: "Internal server error",

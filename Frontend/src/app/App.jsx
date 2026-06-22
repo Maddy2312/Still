@@ -11,7 +11,6 @@ import useAuth from '../features/auth/hooks/useAuth.js'
 const App = () => {
   const { handleGetCurrentUser } = useAuth();
   const user = useSelector((state) => state.auth.user);
-  console.log(user);
   useEffect(() => {
     handleGetCurrentUser();
   }, [])

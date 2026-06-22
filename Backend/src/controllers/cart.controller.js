@@ -11,7 +11,6 @@ import { config } from "../config/config.js";
 export const addToCart = async (req, res) => {
   try {
     const { productId, variantId } = req.params;
-    console.log(productId, variantId);
     const { quantity } = req.body;
     const product = await productModel.findOne({
       _id: productId,
@@ -92,7 +91,6 @@ export const addToCart = async (req, res) => {
       message: "Product added to cart successfully",
     });
   } catch (error) {
-    console.log(error);
     res.status(500).json({
       success: false,
       message: "Internal server error",
@@ -115,7 +113,6 @@ export const getCart = async (req, res) => {
       cart,
     });
   } catch (error) {
-    console.log(error);
     res.status(500).json({
       success: false,
       message: "Internal server error",
@@ -189,7 +186,6 @@ export const incrementUpdateCartQuantity = async (req, res) => {
       message: "Item quantity incremented successfully",
     });
   } catch (error) {
-    console.log(error);
     res.status(500).json({
       success: false,
       message: "Internal server error",
@@ -260,7 +256,6 @@ export const decrementUpdateCartQuantity = async (req, res) => {
       message: "Product added to cart successfully",
     });
   } catch (error) {
-    console.log(error);
     res.status(500).json({
       success: false,
       message: "Internal server error",
@@ -312,7 +307,6 @@ export const createOrderController = async (req, res) => {
       order
     });
   } catch (error) {
-    console.log(error);
     res.status(500).json({
       success: false,
       message: "Internal server error",
@@ -358,7 +352,6 @@ export const verifyOrderController = async (req, res) => {
     });
     
   } catch (error) {
-    console.log(error);
     res.status(500).json({
       success: false,
       message: "Internal server error",

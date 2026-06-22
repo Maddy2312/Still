@@ -31,7 +31,6 @@ export const createProduct = async (req, res) => {
       product,
     });
   } catch (error) {
-    console.log(error);
     return res.status(500).json({
       success: false,
       message: "Internal server error",
@@ -51,7 +50,6 @@ export const getSellerProducts = async (req, res) => {
       products,
     });
   } catch (error) {
-    console.log(error);
     return res.status(500).json({
       success: false,
       message: "Internal server error",
@@ -75,7 +73,6 @@ export const getProductById = async (req, res) => {
       product,
     });
   } catch (error) {
-    console.log(error);
     return res.status(500).json({
       success: false,
       message: "Internal server error",
@@ -92,7 +89,6 @@ export const getAllProducts = async (req, res) => {
       products,
     });
   } catch (error) {
-    console.log(error);
     return res.status(500).json({
       success: false,
       message: "Internal server error",
@@ -116,7 +112,6 @@ export const deleteProduct = async (req, res) => {
       message: "Product deleted successfully",
     });
   } catch (error) {
-    console.log(error);
     return res.status(500).json({
       success: false,
       message: "Internal server error",
@@ -164,7 +159,6 @@ export const createProductVariant = async (req, res) => {
       product,
     });
   } catch (error) {
-    console.log(error);
     return res.status(500).json({
       success: false,
       message: "Internal server error",
@@ -203,7 +197,6 @@ export const deleteProductVariant = async (req, res) => {
     });
     
   } catch (error) {
-    console.log(error);
     return res.status(500).json({
       success: false,
       message: "Internal server error",
