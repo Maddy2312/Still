@@ -328,7 +328,7 @@ const Home = () => {
               </h2>
             </div>
             <button
-              onClick={() => navigate('/products')}
+              onClick={() => navigate('/')}
               className="font-sans-luxury hidden md:flex items-center gap-3 text-[9px] tracking-[0.4em] uppercase text-stone-400 hover:text-white transition-colors border-b border-stone-700 hover:border-white pb-1"
             >
               View all
@@ -384,7 +384,7 @@ const Home = () => {
           {/* Mobile view all */}
           <div className="md:hidden text-center mt-16">
             <button
-              onClick={() => navigate('/products')}
+              onClick={() => navigate('/')}
               className="font-sans-luxury text-[9px] tracking-[0.4em] uppercase text-stone-400 border-b border-stone-600 pb-1"
             >
               View all fragrances
@@ -398,7 +398,7 @@ const Home = () => {
         {/* Left — Image */}
         <div className="relative overflow-hidden min-h-[50vh] md:min-h-0">
           <img
-            src="https://images.unsplash.com/photo-1615486171434-6019a79a6331?q=80&w=1200&auto=format&fit=crop"
+            src="https://images.unsplash.com/photo-1622618991746-fe6004db3a47?q=80&w=1600&auto=format&fit=crop"
             alt="The Atelier"
             className="absolute inset-0 w-full h-full object-cover opacity-60 hover:scale-105 transition-transform duration-[4000ms]"
           />
@@ -437,7 +437,7 @@ const Home = () => {
             The Essence
           </h2>
           <button
-            onClick={() => navigate('/products')}
+            onClick={() => navigate('/')}
             className="font-sans-luxury mt-2 bg-transparent border border-white/30 text-white px-10 py-4 text-[9px] uppercase tracking-[0.4em] hover:bg-white hover:text-[#0c0b09] transition-all duration-500 backdrop-blur-sm"
           >
             Shop the collection
@@ -496,7 +496,7 @@ const Home = () => {
               Born from fire, water, earth, and air — combined with the unparalleled expertise of master artisans.
             </p>
             <button
-              onClick={() => navigate('/products')}
+              onClick={() => navigate('/')}
               className="font-sans-luxury text-[9px] tracking-[0.4em] uppercase text-stone-300 border-b border-stone-600 hover:border-stone-300 hover:text-white pb-1 transition-all"
             >
               Explore the atelier
